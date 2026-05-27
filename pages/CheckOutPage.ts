@@ -1,6 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 
-class CheckOutPage {
+export class CheckOutPage {
 
     readonly page: Page;
     readonly firstNameInput: Locator
@@ -8,6 +8,8 @@ class CheckOutPage {
     readonly postalCodeInput: Locator
     readonly continueButton: Locator;
     readonly cancelButton: Locator;
+    readonly errorMessage: Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -16,6 +18,9 @@ class CheckOutPage {
         this.postalCodeInput = page.locator('[data-test="postalCode"]');
         this.continueButton = page.locator('[data-test="continue"]');
         this.cancelButton = page.locator('[data-test="cancel"]');
+        this.errorMessage = page.locator('[data-test="error"]');
+
+
 
     }    
 
@@ -33,6 +38,11 @@ class CheckOutPage {
     async cancelCheckout(): Promise<void> {
         await this.cancelButton.click();
     }
+    
+    async getErrorMessage(): Promise <string>{
+        return await this.errorMessage.textContent()||'';
+    }
+
 
 
 }

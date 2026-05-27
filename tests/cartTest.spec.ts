@@ -19,12 +19,13 @@ test.describe('Tests the Cart page', () => {
 
         const inventoryPage = new InventoryPage(page);
         const cartPage = new CartPage(page);
+        const cartItems = await cartPage.getCartItemsNames();
 
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
 
         await inventoryPage.CartItemButton();
-        const cartItems = await cartPage.getCartItemsNames();
+        
 
         //Assertions
         expect(cartItems).toContain('Sauce Labs Backpack');
