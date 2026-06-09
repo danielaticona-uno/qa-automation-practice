@@ -1,29 +1,14 @@
 import { test, expect } from '@playwright/test';
 import Ajv from 'ajv';
 import { bookingSchema } from '../schemas/bookingSchema';
+import { createBooking } from '../utils/bookingHelper';
 
 test('Schema Validation', async ({ request }) => {
 
     // create booking
-    const createResponse = await request.post(
-        '/booking',
-        {
-            data: {
-                "firstname": "Jim",
-                "lastname": "Brown",
-                "totalprice": 111,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2018-01-01",
-                    "checkout": "2019-01-01"
-                },
-                "additinalneeds": "Breakfast"
-            }
-        }
-    );
+    const bookingId = await createBooking(request);
 
-    const createBody = await createResponse.json();
-    const bookingId = createBody.bookingid;
+
     // obtener el booking creado
     const getResponse = await request.get(
         `/booking/${bookingId}`

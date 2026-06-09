@@ -1,41 +1,16 @@
 import { test, expect } from '@playwright/test';
+import { getToken } from '../utils/authHelper';
+import { createBooking } from '../utils/bookingHelper';
+import { updateBookingPayload } from '../test-data/updateBookingPayload';
 
 test('PUT - Update Booking', async ({ request }) => {
 
-    //auth
-    const authResponse = await request.post(
-        '/auth',
-        {
-            data: {
-                username: 'admin',
-                password: 'password123'
-            }
-        }
-    );
-
-    const authBody = await authResponse.json();
-    const token = authBody.token;
+    // auth
+    const token = await getToken(request);
 
     // create booking
-    const createResponse = await request.post(
-        '/booking',
-        {
-            data: {
-                "firstname": "Jim",
-                "lastname": "Brown",
-                "totalprice": 111,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2018-01-01",
-                    "checkout": "2019-01-01"
-                },
-                "additinalneeds": "Breakfast"
-            }
-        }
-    );
+    const bookingId = await createBooking(request);
 
-    const createBody = await createResponse.json();
-    const bookingId = createBody.bookingid;
 
     //update booking
     const updateResponse = await request.put(
@@ -44,31 +19,21 @@ test('PUT - Update Booking', async ({ request }) => {
             headers: {
                 Cookie: `token=${token}`
             },
-            data: {
-                "firstname": "Jin Update",
-                "lastname": "Brownn",
-                "totalprice": 158,
-                "depositpaid": false,
-                "bookingdates": {
-                    "checkin": "2026-07-01",
-                    "checkout": "2026-07-30"
-                },
-                "additinalneeds": "Luncch"
-            }
+            data: updateBookingPayload
         }
     );
     console.log('status: ', updateResponse.status());
     console.log('Response: ', await updateResponse.text());
     expect(updateResponse.status()).toBe(200);
     const updateBooking = await updateResponse.json();
-     
-    
+
+
     expect(updateBooking.firstname).toBe('Jin Update');
     expect(updateBooking.lastname).toBe('Brownn');
     expect(updateBooking.totalprice).toBe(158);
 
 
-    
+
 
 
 

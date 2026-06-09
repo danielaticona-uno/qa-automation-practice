@@ -1,34 +1,20 @@
 import { test, expect } from '@playwright/test';
+import { bookingPayload } from '../test-data/bookingPayload';
+import { createBooking } from '../utils/bookingHelper';
 
 test('GET - Create and Get Booking', async ({ request }) => {
+    
     //create booking
-    const createResponse = await request.post(
-        '/booking',
-        {
-            data: {
-                "firstname": "Jim",
-                "lastname": "Brown",
-                "totalprice": 111,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2018-01-01",
-                    "checkout": "2019-01-01"
-                },
-                "additinalneeds": "Breakfast"
-            }
-        }   
-    );
+    const bookingId = await createBooking(request);
 
-    expect(createResponse.status()).toBe(200);
-    const createBody = await createResponse.json();
-    //console.log(createBody);
-    const bookingID = createBody.bookingid;
-    console.log('Booking ID: ', bookingID);
+    console.log('Booking ID: ', bookingId);
+   
 
     // get booking
     const getResponse = await request.get(
-        `/booking/${bookingID}`
+        `/booking/${bookingId}`
     );
+    
     expect(getResponse.status()).toBe(200);
 
     const booking =await getResponse.json();

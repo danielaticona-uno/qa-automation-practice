@@ -1,25 +1,16 @@
 import { test, expect } from '@playwright/test';
+import { bookingPayload } from '../test-data/bookingPayload';
 
 test('POST - Create Booking', async ({ request }) => {
-    const response = await request.post(
+    
+    const createResponse = await request.post(
         '/booking',
         {
-            data: {
-                "firstname": "Jim",
-                "lastname": "Brown",
-                "totalprice": 111,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2018-01-01",
-                    "checkout": "2019-01-01"
-                },
-                "additinalneeds": "Breakfast"
-            }
-        }   
-    );
+            data: bookingPayload
+        });
 
-    expect(response.status()).toBe(200);
-    const responseBody = await response.json();
+    expect(createResponse.status()).toBe(200);
+    const responseBody = await createResponse.json();
     console.log(responseBody);
     expect(responseBody.bookingid).toBeTruthy();
 });
