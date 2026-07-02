@@ -1,9 +1,12 @@
 import { Page, Locator } from '@playwright/test';
-//import { promises } from 'node:dns';
+import { SideMenu } from './components/SideMenu';
+import { CartPage } from './CartPage';
+import { BasePage} from './BasePage';
 
-export class InventoryPage {
 
-   readonly page: Page;
+export class InventoryPage extends BasePage {
+
+   readonly sideMenu: SideMenu;
    readonly title: Locator;
    readonly addBackPackButton: Locator;
    readonly cartBadge: Locator;
@@ -13,11 +16,13 @@ export class InventoryPage {
    readonly inventoryItems: Locator;
    readonly iventoryPrices: Locator;
    readonly productTitleBike: Locator;
-   readonly productTilePage:Locator;
+   readonly productTilePage: Locator;
    readonly titlePage: Locator;
 
    constructor(page: Page) {
-      this.page = page;
+
+      super(page);
+      this.sideMenu = new SideMenu(page);
       this.title = page.locator('.title');
       this.addBackPackButton = page.locator('[data-test="add-to-cart-sauce-labs-backpack"]')
       this.cartBadge = page.locator('[data-test="shopping-cart-link"]');
@@ -28,13 +33,14 @@ export class InventoryPage {
       this.iventoryPrices = page.locator('.inventory_item_price')
       this.productTitleBike = page.locator('[data-test="item-0-title-link"]')
       this.productTilePage = page.locator('[data-test="inventory-item-name"]')
-      this.titlePage =page.locator('[data-test="title"]')
-      
+      this.titlePage = page.locator('[data-test="title"]')
+
    }
 
    async addBackPackToCart(): Promise<void> {
       await this.addBackPackButton.click();
    }
+   
    async addOnesietoCart(): Promise<void> {
       await this.addOnesie.click();
    }
@@ -44,9 +50,9 @@ export class InventoryPage {
       return Number(count);
    }
 
-      async CartItemButton(): Promise<void> {
+   async openCart(): Promise<CartPage> {
       await this.cartBadge.click();
-
+      return new CartPage(this.page);
    }
 
    async removeBackPackButtonToCart(): Promise<void> {
@@ -70,23 +76,20 @@ export class InventoryPage {
    async sortbyHightoLow(): Promise<void> {
       await this.sortButton.selectOption('Price (high to low)');
 
-   }  
+   }
 
    async getInventoryItemNames(): Promise<string[]> {
       return await this.inventoryItems.allTextContents()
    }
 
-   async getInventoryPrices(): Promise<number[]>{
+   async getInventoryPrices(): Promise<number[]> {
       const pricesText = await this.iventoryPrices.allTextContents();
-      return pricesText.map(price => Number(price.replace('$','')));
-   
+      return pricesText.map(price => Number(price.replace('$', '')));
+
    }
 
-   async redirectPage(): Promise<void>{
+   async redirectPage(): Promise<void> {
       this.productTitleBike.click();
    }
-
-   
-
 
 }

@@ -9,10 +9,11 @@ test.describe('SauceDEmo Test - Login Tests', () => {
     test('Login with valid credentials', async ({ page }) => {
         const loginPage = new LoginPage(page);
         await loginPage.goto();
-        await loginPage.login(users.standardUser.username, users.standardUser.password);
+        const inventoryPage = await loginPage.login(users.standardUser.username, users.standardUser.password);
 
+        //await loginPage.login(users.standardUser.username, users.standardUser.password);
         // Add assertions to verify successful login, e.g., check for a specific element on the landing page
-        const inventoryPage = new InventoryPage(page);
+        //const inventoryPage = new InventoryPage(page);
         await expect(inventoryPage.title).toHaveText('Products');
     });
 

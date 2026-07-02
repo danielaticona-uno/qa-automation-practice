@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { InventoryPage } from '../pages/InventoryPage';
 import { LoginPage } from '../pages/LoginPage';
-import { CartPage } from '../pages/CartPage';
+//import { CartPage } from '../pages/CartPage';
 import { users } from '../data/users';
-import { CheckOutPage } from '../pages/CheckOutPage';
+//import { CheckOutPage } from '../pages/CheckOutPage';
 import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
 
 
@@ -11,17 +11,20 @@ import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
 test.describe('Tests the Checkout: Overview page', () => {
 
     test.beforeEach(async ({ page }) => {
+
         const loginPage = new LoginPage(page);
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckOutPage(page);
+
 
         await loginPage.goto();
         await loginPage.login(users.standardUser.username, users.standardUser.password);
+
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
-        await inventoryPage.CartItemButton();
-        await cartPage.checkout();
+
+        const cartPage = await inventoryPage.openCart();
+        const checkoutPage = await cartPage.checkout();
+         
         await checkoutPage.fillCheckoutInformation('Pablo', 'Calvo', '15477');
         await checkoutPage.continueCheckout();
 
@@ -93,8 +96,4 @@ test.describe('Tests the Checkout: Overview page', () => {
 
     })
     
-    
-
-
-
 })

@@ -1,4 +1,6 @@
 import { Page, Locator } from '@playwright/test';
+import { CheckoutOverviewPage } from './CheckoutOverviewPage';
+import { CartPage } from './CartPage';
 
 export class CheckOutPage {
 
@@ -20,8 +22,6 @@ export class CheckOutPage {
         this.cancelButton = page.locator('[data-test="cancel"]');
         this.errorMessage = page.locator('[data-test="error"]');
 
-
-
     }    
 
 
@@ -31,18 +31,19 @@ export class CheckOutPage {
         await this.postalCodeInput.fill(postalCode);
     }
 
-    async continueCheckout(): Promise<void> {
+    async continueCheckout(): Promise<CheckoutOverviewPage> {
         await this.continueButton.click();
+        return new CheckoutOverviewPage(this.page);
     }
 
-    async cancelCheckout(): Promise<void> {
+    async cancelCheckout(): Promise<CartPage> {
         await this.cancelButton.click();
+        return new CartPage(this.page);
     }
     
     async getErrorMessage(): Promise <string>{
         return await this.errorMessage.textContent()||'';
     }
-
 
 
 }

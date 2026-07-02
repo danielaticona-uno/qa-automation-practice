@@ -1,8 +1,9 @@
 import { Page, Locator } from '@playwright/test';
+import {CheckOutPage} from './CheckOutPage';
+import { BasePage } from './BasePage';
 
-export class CartPage {
+export class CartPage extends BasePage {
 
-    readonly page: Page;
     readonly cartItems: Locator;
     readonly checkoutButton: Locator;
     readonly continueShoppingButton: Locator;   
@@ -10,7 +11,7 @@ export class CartPage {
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.cartItems = page.locator('.inventory_item_name');
         this.checkoutButton = page.locator('[data-test="checkout"]');
         this.continueShoppingButton = page.locator('[data-test="continue-shopping"]')
@@ -26,8 +27,9 @@ export class CartPage {
         await this.continueShoppingButton.click();
     }
 
-    async checkout(): Promise<void> {
+    async checkout(): Promise<CheckOutPage> {
         await this.checkoutButton.click();
+        return new CheckOutPage(this.page)
     }
     
 
