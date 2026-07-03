@@ -14,7 +14,6 @@ export class SideMenu{
         this.allItemsLink =page.locator('#inventory_sidebar_link'); 
         this.closeButton =page.locator('#react-burger-cross-btn'); 
 
-
     }
 
     async open(): Promise<void>{
@@ -34,7 +33,4 @@ export class SideMenu{
     async close(): Promise<void>{
         await this.closeButton.click();
     }
-
-
-
 }

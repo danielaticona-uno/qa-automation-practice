@@ -1,10 +1,10 @@
 import { Page, Locator } from '@playwright/test';
 import { CheckoutOverviewPage } from './CheckoutOverviewPage';
 import { CartPage } from './CartPage';
+import { BasePage } from './BasePage';
 
-export class CheckOutPage {
+export class CheckOutPage extends BasePage{
 
-    readonly page: Page;
     readonly firstNameInput: Locator
     readonly lastNameInput: Locator;
     readonly postalCodeInput: Locator
@@ -14,7 +14,7 @@ export class CheckOutPage {
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.firstNameInput = page.locator('[data-test="firstName"]');
         this.lastNameInput = page.locator('[data-test="lastName"]');
         this.postalCodeInput = page.locator('[data-test="postalCode"]');
