@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
-import { InventoryPage } from '../pages/InventoryPage';
 import { users } from '../data/users';
 
 
@@ -11,9 +10,7 @@ test.describe('SauceDEmo Test - Login Tests', () => {
         await loginPage.goto();
         const inventoryPage = await loginPage.login(users.standardUser.username, users.standardUser.password);
 
-        //await loginPage.login(users.standardUser.username, users.standardUser.password);
-        // Add assertions to verify successful login, e.g., check for a specific element on the landing page
-        //const inventoryPage = new InventoryPage(page);
+       // Add assertions to verify successful login, e.g., check for a specific element on the landing page
         await expect(inventoryPage.title).toHaveText('Products');
     });
 

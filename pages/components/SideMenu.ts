@@ -17,21 +17,21 @@ export class SideMenu{
 
     }
 
-    async open(){
+    async open(): Promise<void>{
         await this.menuButton.click();
     }
 
-    async logout(){
+    async logout(): Promise<void>{
         await this.open();
         await this.logoutLink.click();
     }
 
-    async goToAllItems(){
+    async goToAllItems(): Promise<void>{
         await this.open();
         await this.allItemsLink.click();
     }
 
-    async close(){
+    async close(): Promise<void>{
         await this.closeButton.click();
     }
 
