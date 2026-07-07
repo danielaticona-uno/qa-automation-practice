@@ -1,0 +1,23 @@
+{
+  "name": "cucumber-bdd-suite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "cucumber-js --require-module ts-node/register --require src/support/**/*.ts --require src/pages/**/*.ts --require src/steps/**/*.ts --format json:reports/json/cucumber_report.json features/**/*.feature",
+    "report": "ts-node src/report/reporter.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.0",
+    "dotenv": "^17.4.2",
+    "multiple-cucumber-html-reporter": "^3.8.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
