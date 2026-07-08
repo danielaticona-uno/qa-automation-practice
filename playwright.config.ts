@@ -28,8 +28,6 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-     baseURL: 'https://saucedemo.com',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -37,15 +35,42 @@ export default defineConfig({
     screenshot: 'on',
     headless: true
 
-    baseURL: 'https://restful-booker.herokuapp.com',
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
+      name: "saucedemo",
+      testMatch: [
+        "**/productTest.spec.ts",
+        "**/cartTest.spec.ts",
+        "**/checkout*.spec.ts"
+      ],
+      use: {
+        baseURL: "https://www.saucedemo.com",
+      },
+    },
+
+    {
+      name: "restful-booker",
+      testMatch: [
+        "**/auth.spec.ts",
+        "**/booking.spec.ts",
+        "**/deleteBooking.spec.ts",
+        "**/listBooking.spec.ts",
+        "**/parameterizedBooking.spec.ts",
+        "**/partialUpdateBooking.spec.ts",
+        "**/schemaValidator.spec.ts",
+        "**/updateBooking.spec.ts"
+      ],
+      use: {
+        baseURL: "https://restful-booker.herokuapp.com",
+      },
+    },
+
+    /*{
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
