@@ -1,5 +1,5 @@
 {
-  "name": "playright-pom-demo",
+  "name": "qa-autoamtion-complete",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,6 +13,7 @@
     "@types/node": "^25.9.0"
   },
   "dependencies": {
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "ajv": "^8.20.0"
   }
 }
