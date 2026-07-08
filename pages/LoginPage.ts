@@ -1,13 +1,15 @@
 import {Page, Locator} from '@playwright/test';
+import{BasePage} from './BasePage';
+import { InventoryPage } from './InventoryPage';
 
-export class LoginPage {
-    readonly page:Page;
+export class LoginPage extends BasePage {
+
     readonly usernameInput:Locator;
     readonly passwordInput:Locator;
     readonly loginButton:Locator;
 
     constructor(page:Page) {
-        this.page = page;
+        super(page);
 
         this.usernameInput = page.locator('[data-test="username"]');
         this.passwordInput = page.locator('[data-test="password"]');
@@ -21,10 +23,11 @@ export class LoginPage {
     async login(
         username:string,
         password:string
-    ):Promise<void> {
+    ):Promise<InventoryPage> {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
-        await this.loginButton.click();             
+        await this.loginButton.click();   
+        return new InventoryPage (this.page);          
     }
 
     async getErrorMessage():Promise<string> {

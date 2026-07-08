@@ -1,8 +1,8 @@
 import { Page, Locator } from '@playwright/test';
+import { CheckoutCompletePage } from './CheckoutCompletePage';
+import { BasePage } from './BasePage';
 
-export class CheckoutOverviewPage {
-
-    readonly page: Page;
+export class CheckoutOverviewPage extends BasePage {
 
     readonly itemNames: Locator;
     readonly itemPrices: Locator;
@@ -21,7 +21,7 @@ export class CheckoutOverviewPage {
 
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
 
         this.itemNames = page.locator('.inventory_item_name');
         this.itemPrices = page.locator('.inventory_item_price');
@@ -39,8 +39,9 @@ export class CheckoutOverviewPage {
 
     }
 
-    async finishCheckout(): Promise<void> {
+    async finishCheckout(): Promise<CheckoutCompletePage> {
         await this.finishButton.click();
+        return new CheckoutCompletePage(this.page);
     }
 
     async cancelCheckout(): Promise<void> {

@@ -1,8 +1,7 @@
 import { Page, Locator } from '@playwright/test';
+import { BasePage} from './BasePage';
 
-export class CheckoutCompletePage {
-
-    readonly page: Page;
+export class CheckoutCompletePage extends BasePage{
 
     readonly titlePage :Locator;
     readonly completeHeader: Locator;
@@ -14,7 +13,7 @@ export class CheckoutCompletePage {
 
     constructor(page: Page) {
 
-        this.page = page;
+        super(page);
 
         this.titlePage = page.locator('[data-test="title"]');
         this.completeHeader = page.locator('[data-test="complete-header"]');

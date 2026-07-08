@@ -18,15 +18,13 @@ test.describe('Tests the Cart page', () => {
     test('list cart items', async ({ page }) => {
 
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const cartItems = await cartPage.getCartItemsNames();
 
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
 
-        await inventoryPage.CartItemButton();
-        
-
+        const cartPage = await inventoryPage.openCart();
+        const cartItems = await cartPage.getCartItemsNames();
+     
         //Assertions
         expect(cartItems).toContain('Sauce Labs Backpack');
         expect(cartItems).toContain('Sauce Labs Onesie');
@@ -37,13 +35,12 @@ test.describe('Tests the Cart page', () => {
     test('Remove cart items', async ({ page }) => {
 
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
 
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
 
-        await inventoryPage.CartItemButton();
-        const cartItems = await cartPage.getCartItemsNames();
+        const cartPage = await inventoryPage.openCart();
+        const cartItems = await cartPage.getCartItemsNames();       
 
         //Assertions before remove
         expect(cartItems).toContain('Sauce Labs Backpack');
@@ -66,13 +63,12 @@ test.describe('Tests the Cart page', () => {
     test('Continue shopping from cart with items', async ({ page }) => {
 
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
 
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
 
-        await inventoryPage.CartItemButton();
-        const cartItems = await cartPage.getCartItemsNames();
+        const cartPage = await inventoryPage.openCart();
+        const cartItems = await cartPage.getCartItemsNames();     
 
         //Assertions
         expect(cartItems).toContain('Sauce Labs Backpack');
@@ -91,9 +87,8 @@ test.describe('Tests the Cart page', () => {
     test('Continue shopping from cart without items', async ({ page }) => {
 
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
+        const cartPage =await inventoryPage.openCart()
 
-        await inventoryPage.CartItemButton();
         const cartItems = await cartPage.getCartItemsNames();
 
         await cartPage.continueShopping();
@@ -107,12 +102,11 @@ test.describe('Tests the Cart page', () => {
     test('Checkout shopping from cart with items', async ({ page }) => {
 
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
 
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
+        const cartPage = await inventoryPage.openCart();
 
-        await inventoryPage.CartItemButton();
         const cartItems = await cartPage.getCartItemsNames();
 
         //Assertions
@@ -129,9 +123,8 @@ test.describe('Tests the Cart page', () => {
     test('Checkout - shopping from cart without items', async ({ page }) => {
 
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-
-        await inventoryPage.CartItemButton();
+        const cartPage = await inventoryPage.openCart();
+       
         const cartItems = await cartPage.getCartItemsNames();
 
         await cartPage.checkout();

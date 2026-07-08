@@ -13,26 +13,31 @@ test.describe('Tests the Checkout: Overview page', () => {
     test.beforeEach(async ({ page }) => {
         const loginPage = new LoginPage(page);
         const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
         const checkoutPage = new CheckOutPage(page);
-        const checkoutOverview = new CheckoutOverviewPage(page);
+
 
         await loginPage.goto();
         await loginPage.login(users.standardUser.username, users.standardUser.password);
+
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
-        await inventoryPage.CartItemButton();
-        await cartPage.checkout();
+        
+        const cartPage = await inventoryPage.openCart();
+        const checkoutPageStep1 = await cartPage.checkout();
+        
         await checkoutPage.fillCheckoutInformation('Pablo', 'Calvo', '15477');
-        await checkoutPage.continueCheckout();
+
+
+        const checkoutOverview =await checkoutPageStep1.continueCheckout();
         await checkoutOverview.finishCheckout();
 
+        
     })
 
     test ('Validate that is possible to cancel ', async ({ page }) => {
 
         const checkoutComplete = new CheckoutCompletePage(page);
-        checkoutComplete.backInventoryButton();
+        await checkoutComplete.backInventoryButton();
 
         //assertion
         await expect(page).toHaveURL(/inventory.html/);
@@ -54,14 +59,6 @@ test.describe('Tests the Checkout: Overview page', () => {
         await expect(checkoutComplete.backHomebutton).toHaveText('Back Home');
 
     })
-
-
-
-
-
-
-
-
 
 
 })
