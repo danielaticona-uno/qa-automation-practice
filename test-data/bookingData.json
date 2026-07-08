@@ -1,0 +1,22 @@
+[
+    {
+        "firstname": "Aemond",
+        "lastname": "Targaryen",
+        "totalprice": 100
+    },
+    {
+        "firstname": "Deamond",
+        "lastname": "Targaryen",
+        "totalprice": 520
+    },
+        {
+        "firstname": "Aegon",
+        "lastname": "Targaryen",
+        "totalprice": 85
+    },
+        {
+        "firstname": "Caraxes",
+        "lastname": "Targaryen",
+        "totalprice": 45
+    }
+]

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { InventoryPage } from '../pages/InventoryPage';
+//import { InventoryPage } from '../pages/InventoryPage';
 import { LoginPage } from '../pages/LoginPage';
-import { CartPage } from '../pages/CartPage';
+//import { CartPage } from '../pages/CartPage';
 import { users } from '../data/users';
 import { CheckOutPage } from '../pages/CheckOutPage';
 
@@ -10,21 +10,24 @@ test.describe('Tests the Checkout page', () => {
     test.beforeEach(async ({ page }) => {
 
         const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-
         await loginPage.goto();
-        await loginPage.login(users.standardUser.username, users.standardUser.password);
+
+        const inventoryPage = await loginPage.login(
+            users.standardUser.username,
+            users.standardUser.password
+        )
+        //await loginPage.login(users.standardUser.username, users.standardUser.password);
         await inventoryPage.addBackPackToCart();
         await inventoryPage.addOnesietoCart();
-        await inventoryPage.CartItemButton();
+        
+        //await inventoryPage.CartItemButton();
+        const cartPage =await inventoryPage.openCart();
         await cartPage.checkout();
 
 
     })
 
     test('Validate the Checkout link', async ({ page }) => {
-
 
         //Assertions after checkout
         expect(page).toHaveURL(/checkout-step-one.html/);
@@ -35,8 +38,10 @@ test.describe('Tests the Checkout page', () => {
         const checkoutPage = new CheckOutPage(page);
 
         await checkoutPage.fillCheckoutInformation('Pablo', 'Calvo', '15477');
-        await checkoutPage.continueCheckout();
-
+       
+        //await checkoutPage.continueCheckout();
+        const overviewPage =await checkoutPage.continueCheckout();
+        
         //assertions
         expect(page).toHaveURL(/checkout-step-two.html/);
     })
