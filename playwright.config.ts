@@ -56,14 +56,14 @@ export default defineConfig({
     {
       name: "restful-booker",
       testMatch: [
+        "**/updateBooking.spec.ts",
         "**/auth.spec.ts",
         "**/booking.spec.ts",
         "**/deleteBooking.spec.ts",
         "**/listBooking.spec.ts",
         "**/parameterizedBooking.spec.ts",
         "**/partialUpdateBooking.spec.ts",
-        "**/schemaValidator.spec.ts",
-        "**/updateBooking.spec.ts"
+        "**/schemaValidator.spec.ts"
       ],
       use: {
         baseURL: "https://restful-booker.herokuapp.com",
