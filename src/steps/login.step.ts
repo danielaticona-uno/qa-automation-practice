@@ -10,18 +10,19 @@ Given("I am on the login page", async function () {
 });
 
 When("I login with valid credentials", async function () {
-    console.log("USER:", process.env.SAUCE_USERNAME);
-    console.log("PASS:", process.env.SAUCE_PASSWORD);
+
+    console.log("PASS exists:", !!process.env.SAUCE_PASSWORD);
 
     await loginPage.login(
         process.env.SAUCE_USERNAME!,
         process.env.SAUCE_PASSWORD!
     );
+
 });
 
 Then("I should see the inventory page", async function () {
 
-    await expect(this.page).toHaveURL(/inventory.html/,{timeout:50000});
+    await expect(this.page).toHaveURL(/inventory.html/, { timeout: 50000 });
 });
 
 When("I login with invalid credentials", async function () {
