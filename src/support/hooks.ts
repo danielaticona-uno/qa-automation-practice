@@ -4,6 +4,9 @@ import type { Browser, Page } from "playwright";
 import fs from "fs";
 import dotenv from "dotenv";
 
+console.log("USER:", process.env.SAUCE_USERNAME);
+console.log("PASS exits:", !!process.env.SAUCE_USERNAME);
+
 setDefaultTimeout(30*1000);
 dotenv.config();
 
