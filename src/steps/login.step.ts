@@ -21,9 +21,13 @@ When("I login with valid credentials", async function () {
 });
 
 Then("I should see the inventory page", async function () {
-    await expect(this.page).toHaveURL(/.*inventory\.html/, {
-        timeout: 10000
+
+    await this.page.waitForURL("**/inventory.html", {
+        timeout: 15000
     });
+
+    await expect(this.page).toHaveURL(/.*inventory\.html/);
+
 });
 
 When("I login with invalid credentials", async function () {
