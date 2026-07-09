@@ -25,6 +25,5 @@ export class LoginPage {
         await this.usernmameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
-    
     }
 }
