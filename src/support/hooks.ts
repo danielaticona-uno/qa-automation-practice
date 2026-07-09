@@ -16,7 +16,7 @@ setWorldConstructor(CustomWorld);
 
 Before(async function(this:CustomWorld){
     this.browser = await chromium.launch({
-        headless: false
+        headless: process.env.CI?true:false
     });
     this.page= await this.browser.newPage();
 });
