@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import Ajv from 'ajv';
-import { bookingSchema } from '../schemas/bookingSchema';
-import { createBooking } from '../utils/bookingHelper';
+import { bookingSchema } from '../../schemas/bookingSchema';
+import { createBooking } from '../../utils/bookingHelper';
 
 test('Schema Validation', async ({ request }) => {
 

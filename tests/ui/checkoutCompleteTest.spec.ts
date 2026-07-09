@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { InventoryPage } from '../pages/InventoryPage';
-import { LoginPage } from '../pages/LoginPage';
-import { CartPage } from '../pages/CartPage';
-import { users } from '../data/users';
-import { CheckOutPage } from '../pages/CheckOutPage';
-import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
-import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
+import { InventoryPage } from '../../pages/InventoryPage';
+import { LoginPage } from '../../pages/LoginPage';
+import { CartPage } from '../../pages/CartPage';
+import { users } from '../../data/users';
+import { CheckOutPage } from '../../pages/CheckOutPage';
+import { CheckoutOverviewPage } from '../../pages/CheckoutOverviewPage';
+import { CheckoutCompletePage } from '../../pages/CheckoutCompletePage';
 
 test.describe('Tests the Checkout: Overview page', () => {
 

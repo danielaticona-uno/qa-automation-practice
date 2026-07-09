@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { getToken } from '../utils/authHelper';
-import { createBooking } from '../utils/bookingHelper';
-import { updateBookingPayload } from '../test-data/updateBookingPayload';
+import { getToken } from '../../utils/authHelper';
+import { createBooking } from '../../utils/bookingHelper';
+import { updateBookingPayload } from '../../test-data/updateBookingPayload';
 
 test('PUT - Update Booking', async ({ request }) => {
 

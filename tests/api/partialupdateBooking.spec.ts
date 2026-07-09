@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { getToken } from '../utils/authHelper';
-import { createBooking } from '../utils/bookingHelper';
+import { getToken } from '../../utils/authHelper';
+import { createBooking } from '../../utils/bookingHelper';
 
 test('PATCH - Partial Update Booking', async ({ request }) => {
 

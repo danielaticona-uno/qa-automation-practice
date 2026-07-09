@@ -5,8 +5,11 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "cucumber-js --require-module ts-node/register --require src/support/**/*.ts --require src/steps/**/*.ts",
-    "test:playwright": "playwright test"
+    "test:ui":"playwright test ./tests/ui",
+    "test:api":"playwright test ./tests/api",
+    "test:cucumber":"cucumber-js --config cucumberconfig.cjs", 
+    "test:all":"npm run test:ui && npm run test:api && npm run test:cucumber"
+
   },
   "keywords": [],
   "author": "",

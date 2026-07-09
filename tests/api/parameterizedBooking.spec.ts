@@ -1,5 +1,5 @@
 import { test, expect, request } from '@playwright/test';
-import bookingData from '../test-data/bookingData.json';
+import bookingData from '../../test-data/bookingData.json';
 
 for(const data of bookingData){
     test(`Create booking for ${data.firstname}`,async ({request})=>{

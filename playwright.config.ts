@@ -15,7 +15,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  //testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -43,6 +43,7 @@ export default defineConfig({
   projects: [
     {
       name: "saucedemo",
+      testDir:'./tests/ui',
       testMatch: [
         "**/productTest.spec.ts",
         "**/cartTest.spec.ts",
@@ -55,6 +56,7 @@ export default defineConfig({
 
     {
       name: "restful-booker",
+      testDir:'./tests/api',
       testMatch: [
         "**/updateBooking.spec.ts",
         "**/auth.spec.ts",

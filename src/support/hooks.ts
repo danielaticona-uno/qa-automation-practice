@@ -1,5 +1,6 @@
-import {Before, After,setWorldConstructor, World, Status, setDefaultTimeout} from "@cucumber/cucumber"; 
-import {Browser, Page, chromium} from "playwright";
+import { Before, After, setWorldConstructor, World, Status, setDefaultTimeout } from "@cucumber/cucumber";
+import { chromium } from "playwright";
+import type { Browser, Page } from "playwright";
 import fs from "fs";
 import dotenv from "dotenv";
 

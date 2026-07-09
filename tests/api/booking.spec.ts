@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { bookingPayload } from '../test-data/bookingPayload';
+import { bookingPayload } from '../../test-data/bookingPayload';
 
 test('POST - Create Booking', async ({ request }) => {
     

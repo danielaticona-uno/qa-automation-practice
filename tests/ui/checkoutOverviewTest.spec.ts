@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { InventoryPage } from '../pages/InventoryPage';
-import { LoginPage } from '../pages/LoginPage';
+import { InventoryPage } from '../../pages/InventoryPage';
+import { LoginPage } from '../../pages/LoginPage';
 //import { CartPage } from '../pages/CartPage';
-import { users } from '../data/users';
+import { users } from '../../data/users';
 //import { CheckOutPage } from '../pages/CheckOutPage';
-import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
+import { CheckoutOverviewPage } from '../../pages/CheckoutOverviewPage';
 
 
 
