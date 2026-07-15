@@ -7,6 +7,7 @@ export async function createDriver(){
     return await remote({
        hostname:process.env.APPIUM_HOST,
        port:Number(process.env.APPIUM_PORT),
+       path:"/",
        capabilities:{
         platformName:"Android", 
         "appium:automationName":"UiAutomator2",
