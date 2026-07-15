@@ -6,12 +6,12 @@ module.exports = {
       "ts-node/register"
     ],
     require: [
-      "src/support/**/*.ts",
+      "tests/support/**/*.ts",
       "src/pages/**/*.ts",
-      "src/steps/**/*.ts"
+      "tests/steps/**/*.ts"
     ],
     paths: [
-      "features/**/*.feature"
+      "tests/features/**/*.feature"
     ],
     format: [
       "html:reports/cucumber-report.html"

@@ -1,13 +1,13 @@
 import { hostname } from "node:os";
 import { remote } from "webdriverio";
-import { MenuPage } from "../pages/MenuPage";
-import { LoginPage } from "../pages/LoginPage";
-import { ProductsPage } from "../pages/ProductsPage";
-import { CartPage } from "../pages/CartPage";
-import { CheckoutPage } from "../pages/CheckoutPage";
-import { PaymentPage } from "../pages/PaymentPage";
-import { ReviewOrderPage } from "../pages/ReviewOrderPage";
-import { CheckoutCompletePage } from "../pages/CheckoutCompletePage";
+import { MenuPage } from "../../appium/pages/MenuPage";
+import { LoginPage } from "../../appium/pages/LoginPage";
+import { ProductsPage } from "../../appium/pages/ProductsPage";
+import { CartPage } from "../../appium/pages/CartPage";
+import { CheckoutPage } from "../../appium/pages/CheckoutPage";
+import { PaymentPage } from "../../appium/pages/PaymentPage";
+import { ReviewOrderPage } from "../../appium/pages/ReviewOrderPage";
+import { CheckoutCompletePage } from "../../appium/pages/CheckoutCompletePage";
 
 async function runTest() {
     const driver = await remote({
