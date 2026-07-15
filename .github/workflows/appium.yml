@@ -1,0 +1,48 @@
+name: Appium Android Tests
+
+on:
+    push:
+        branches: [main, master]
+
+    pull_request:
+        branches: [main, master]
+
+jobs:
+    appium:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Setup Java
+              uses: actions/setup-java@v4
+              with:
+                  distribution: temurin
+                  java-version: "17"
+
+            - name: Install Appium
+              run: npm install-g appium
+
+            - name: Verify Appium
+              run: appium -v
+
+            - name: Run Appium tests on Android Emulator
+              uses: reactivecircus/android-emulator-runner@v2
+              with:
+                  api-level: 35
+                  arch: x86_64
+                  profile: pixel
+                  script: |
+                      appium --base-path / &
+                      adb wait-for-device
+                      sleep 30
+                      npm run appium:all

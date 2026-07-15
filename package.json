@@ -5,11 +5,16 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test:ui":"playwright test ./tests/ui",
-    "test:api":"playwright test ./tests/api",
-    "test:cucumber":"cucumber-js --config cucumberconfig.cjs", 
-    "test:all":"npm run test:ui && npm run test:api && npm run test:cucumber"
-
+    "test:ui": "playwright test ./tests/ui",
+    "test:api": "playwright test ./tests/api",
+    "test:cucumber": "cucumber-js --config cucumberconfig.cjs",
+    "test:all": "npm run test:ui && npm run test:api && npm run test:cucumber",
+    "appium:login": "ts-node appium/tests/login.test.ts",
+    "appium:cart": "ts-node appium/tests/addToCart.test.ts",
+    "appium:shipping": "ts-node appium/tests/checkoutShipping.test.ts",
+    "appium:payment": "ts-node appium/tests/payment.test.ts",
+    "appium:complete": "ts-node appium/tests/completeOrder.test.ts",
+    "appium:all": "npm run appium:login && npm run appium:cart && npm run appium:shipping && npm run appium:payment && npm run appium:complete"
   },
   "keywords": [],
   "author": "",
@@ -17,13 +22,14 @@
   "devDependencies": {
     "@cucumber/cucumber": "^11.3.0",
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.0.0",
+    "@types/node": "^25.9.5",
     "multiple-cucumber-html-reporter": "^3.8.0",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   },
   "dependencies": {
+    "ajv": "^8.20.0",
     "dotenv": "^17.4.2",
-    "ajv": "^8.20.0"
+    "webdriverio": "^9.29.1"
   }
 }

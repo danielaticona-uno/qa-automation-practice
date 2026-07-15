@@ -6,10 +6,12 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+#Environment
 .env
-node_modules/
-.env
+
+#Reports
 reports/
 screenshots/
 
+#Logs
 *.log
